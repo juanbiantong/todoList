@@ -8,7 +8,6 @@ export default function Header() {
   const filterStatus = useSelector(state => state.todo.filterStatus);
   const [modalOpen, setModalOpen] = useState(false);
 
-  console.log(filterStatus);
   const updateFilter = e => {
     dispatch(updateFilterStatus(e.target.value));
   };
