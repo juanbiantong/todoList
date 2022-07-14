@@ -81,7 +81,7 @@ function TodoItem({ todo }) {
               {todo.taskName}
             </p>
             <p className='text-xs text-slate-600'>
-              {format(new Date(todo.time), "p, MM eeee yyyy")}
+              {format(new Date(todo.time), "p, dd MMMM yyyy")}
             </p>
           </div>
         </div>
