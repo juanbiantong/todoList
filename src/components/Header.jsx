@@ -1,8 +1,17 @@
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { updateFilterStatus } from "../slices/todoSlice";
 import Modal from "./Modal";
 
 export default function Header() {
+  const dispatch = useDispatch();
+  const filterStatus = useSelector(state => state.todo.filterStatus);
   const [modalOpen, setModalOpen] = useState(false);
+
+  console.log(filterStatus);
+  const updateFilter = e => {
+    dispatch(updateFilterStatus(e.target.value));
+  };
 
   return (
     <div className='flex flex-col mt-10 mx-10 pt-5'>
@@ -19,12 +28,14 @@ export default function Header() {
         </button>
         <div>
           <select
-            defaultValue='all'
+            role='button'
+            value={filterStatus}
+            onChange={updateFilter}
             className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
           >
             <option value='all'>All</option>
-            <option value='comp'>Completed</option>
-            <option value='incl'>Inclomplete</option>
+            <option value='completed'>Completed</option>
+            <option value='incomplete'>Inclomplete</option>
           </select>
         </div>
       </div>

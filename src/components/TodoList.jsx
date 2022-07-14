@@ -4,13 +4,22 @@ import TodoItem from "./TodoItem";
 
 export default function TodoList() {
   const todoList = useSelector(state => state.todo.todoList);
+  const filterStatus = useSelector(state => state.todo.filterStatus);
   const sortedTodoList = [...todoList];
   sortedTodoList.sort((a, b) => new Date(b.time) - new Date(a.time));
+
+  const filteredTodoList = sortedTodoList.filter(item => {
+    if (filterStatus === "all") {
+      return true;
+    }
+    return item.taskStatus === filterStatus;
+  });
+
   return (
     <>
-      {sortedTodoList && sortedTodoList.length > 0 ? (
+      {filteredTodoList && filteredTodoList.length > 0 ? (
         <div className='flex flex-col mx-5 px-3 bg-slate-100 rounded-lg'>
-          {sortedTodoList.map(todo => (
+          {filteredTodoList.map(todo => (
             <TodoItem key={todo.id} todo={todo} />
           ))}
         </div>
