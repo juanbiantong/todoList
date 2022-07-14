@@ -1,4 +1,4 @@
-import moment from "moment";
+import { format } from "date-fns";
 import { motion } from "framer-motion";
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
@@ -59,16 +59,16 @@ function TodoItem({ todo }) {
     <>
       <motion.div
         variants={child}
-        className='flex  justify-between p-3 w-full bg-white my-3 rounded-lg font-semibold '
+        className='flex justify-between p-2 w-full bg-white my-2 rounded-lg font-semibold'
       >
-        <div className='flex items-center'>
+        <div className='flex items-center '>
           <input
             checked={checked}
             onChange={handleCheckBox}
             id='inline-checkbox'
             type='checkbox'
             value=''
-            className='mr-3 w-6 h-6 '
+            className='mr-3 w-6 h-6 shadow-lg'
           />
           <div className='flex flex-col '>
             <p
@@ -81,7 +81,7 @@ function TodoItem({ todo }) {
               {todo.taskName}
             </p>
             <p className='text-xs text-slate-600'>
-              {moment(todo.time).format("Do MMMM YYYY, hh:mm a")}
+              {format(new Date(todo.time), "p, MM eeee yyyy")}
             </p>
           </div>
         </div>
@@ -91,16 +91,16 @@ function TodoItem({ todo }) {
             onKeyDown={handleDelete}
             role='button'
             tabIndex={0}
-            className='rounded-md mr-2 bg-slate-200 p-1'
+            className='rounded-md mr-2 bg-red-200 p-1 shadow-lg'
           >
-            <MdDelete className='w-7 h-7 ' />
+            <MdDelete className='w-7 h-7' />
           </div>
           <div
             onClick={handleUpdate}
             onKeyDown={handleUpdate}
             role='button'
             tabIndex={0}
-            className='rounded-md bg-slate-200 p-1'
+            className='rounded-md bg-green-200 p-1 shadow-lg'
           >
             <MdEdit className='w-7 h-7 ' />
           </div>

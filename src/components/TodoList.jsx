@@ -40,13 +40,18 @@ export default function TodoList() {
         variants={container}
         initial='hidden'
         animate='visible'
-        className='flex flex-col mx-5 px-3 bg-slate-100 rounded-lg'
+        className='flex flex-col mx-3 px-3 bg-slate-100 rounded-lg shadow-lg'
       >
         <AnimatePresence>
           {filteredTodoList && filteredTodoList.length > 0 ? (
             filteredTodoList.map(todo => <TodoItem key={todo.id} todo={todo} />)
           ) : (
-            <motion.p variants={child}>No Todos</motion.p>
+            <motion.p
+              variants={child}
+              className='my-3 p-2 rounded-lg  mx-auto bg-white'
+            >
+              No Todos
+            </motion.p>
           )}
         </AnimatePresence>
       </motion.div>

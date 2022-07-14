@@ -8,15 +8,15 @@ function App() {
       <div className='flex justify-center flex-col md:w-6/12 mx-auto'>
         <Header />
         <TodoList />
-      </div>
+      </div>{" "}
       <Toaster
-        position='top-right'
+        position='bottom-right'
         toastOptions={{
           style: {
-            fontSize: "1.2rem",
+            fontSize: "1rem",
           },
         }}
-      />
+      />{" "}
     </>
   );
 }
