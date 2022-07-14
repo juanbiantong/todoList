@@ -1,10 +1,19 @@
 import moment from "moment";
+import { motion } from "framer-motion";
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { MdDelete, MdEdit } from "react-icons/md";
 import { useDispatch } from "react-redux";
 import { deleteTodo, updateStatus } from "../slices/todoSlice";
 import Modal from "./Modal";
+
+const child = {
+  hidden: { y: 20, opacity: 0 },
+  visible: {
+    y: 0,
+    opacity: 1,
+  },
+};
 
 function TodoItem({ todo }) {
   const dispatch = useDispatch();
@@ -48,7 +57,10 @@ function TodoItem({ todo }) {
   };
   return (
     <>
-      <div className='flex  justify-between p-3 w-full bg-white my-3 rounded-lg font-semibold '>
+      <motion.div
+        variants={child}
+        className='flex  justify-between p-3 w-full bg-white my-3 rounded-lg font-semibold '
+      >
         <div className='flex items-center'>
           <input
             checked={checked}
@@ -93,7 +105,7 @@ function TodoItem({ todo }) {
             <MdEdit className='w-7 h-7 ' />
           </div>
         </div>
-      </div>
+      </motion.div>
 
       <Modal
         todo={todo}

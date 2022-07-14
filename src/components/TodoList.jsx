@@ -1,6 +1,25 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import TodoItem from "./TodoItem";
+import { AnimatePresence, motion } from "framer-motion";
+
+const container = {
+  hidden: { opacity: 1 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: {
+      staggerChildren: 0.2,
+    },
+  },
+};
+const child = {
+  hidden: { y: 20, opacity: 0 },
+  visible: {
+    y: 0,
+    opacity: 1,
+  },
+};
 
 export default function TodoList() {
   const todoList = useSelector(state => state.todo.todoList);
@@ -17,17 +36,20 @@ export default function TodoList() {
 
   return (
     <>
-      {filteredTodoList && filteredTodoList.length > 0 ? (
-        <div className='flex flex-col mx-5 px-3 bg-slate-100 rounded-lg'>
-          {filteredTodoList.map(todo => (
-            <TodoItem key={todo.id} todo={todo} />
-          ))}
-        </div>
-      ) : (
-        <div className='flex justify-center mx-5 py-3 bg-slate-100 rounded-lg'>
-          <div>No todo found</div>
-        </div>
-      )}
+      <motion.div
+        variants={container}
+        initial='hidden'
+        animate='visible'
+        className='flex flex-col mx-5 px-3 bg-slate-100 rounded-lg'
+      >
+        <AnimatePresence>
+          {filteredTodoList && filteredTodoList.length > 0 ? (
+            filteredTodoList.map(todo => <TodoItem key={todo.id} todo={todo} />)
+          ) : (
+            <motion.p variants={child}>No Todos</motion.p>
+          )}
+        </AnimatePresence>
+      </motion.div>
     </>
   );
 }
