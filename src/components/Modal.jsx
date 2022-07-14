@@ -5,6 +5,7 @@ import { v4 as uuid } from "uuid";
 import { useDispatch } from "react-redux";
 import { addTodo, updateTodo } from "../slices/todoSlice";
 import toast from "react-hot-toast";
+import moment from "moment";
 
 const dropIn = {
   hidden: {
@@ -56,7 +57,7 @@ export default function Modal({ type, modalOpen, setModalOpen, todo }) {
             taskName,
             taskDesc,
             taskStatus: "incomplete",
-            time: new Date().toLocaleString(),
+            time: moment().valueOf(),
           })
         );
         toast.success("Task Added Succesfully");

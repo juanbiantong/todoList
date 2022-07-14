@@ -1,5 +1,5 @@
-import { format } from "date-fns";
 import { motion } from "framer-motion";
+import moment from "moment";
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { MdDelete, MdEdit } from "react-icons/md";
@@ -81,7 +81,7 @@ function TodoItem({ todo }) {
               {todo.taskName}
             </p>
             <p className='text-xs text-slate-600'>
-              {format(new Date(todo.time), "p, dd MMMM yyyy")}
+              {moment(todo.time).format("DD/MM/YYYY, hh:mm")}
             </p>
           </div>
         </div>
